@@ -1,18 +1,22 @@
 # Keep
+> Persistent key-value store. A work in progress.
 
-To start your Phoenix server:
+## What's This?
+A Phoenix JSON API wrapper on top of an Erlang dets table. Perfect for stateful microservices when Postgres is overkill.
 
-  * Install dependencies with `mix deps.get`
-  * Start Phoenix endpoint with `mix phx.server`
+## Usage
+Not really packaged for production, but `mix phx.server` to run locally.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+```bash
+$ curl -X PUT -H "Content-Type: text/plain" --data "some data" localhost:4000/data/some_key
+(empty, 201)
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+$ curl localhost:4000/data/some_key
+"some data"
 
-## Learn more
+$ curl -X DELETE localhost:4000/data/some_key
+(empty, 204)
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+$ curl localhost:4000/data/some_key
+(empty, 404)
+```

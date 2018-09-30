@@ -14,8 +14,10 @@ defmodule KeepWeb.ActionController do
         send_resp(conn, :not_found, "")
 
       {:ok, val} ->
-        conn
-        |> json(val)
+        case get_req_header(conn, "content-type") do
+          ["application/json"] -> json(conn, val)
+          [] -> send_resp(conn, 200, val)
+        end
     end
   end
 

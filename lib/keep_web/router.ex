@@ -2,7 +2,7 @@ defmodule KeepWeb.Router do
   use KeepWeb, :router
 
   pipeline :api do
-    plug(:accepts, ["json"])
+    plug(:accepts, ["text", "json"])
   end
 
   scope "/", KeepWeb do

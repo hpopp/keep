@@ -3,12 +3,12 @@ defmodule Keep.Store do
   Documentation for Keep.Store.
   """
 
-  @opts [type: :set]
-
+  @table :storage
+  def opts, do: [type: :set, file: file_path()]
   def file_path, do: Application.get_env(:keep, :file_path)
 
   def get(id) do
-    case :dets.open_file(file_path(), @opts) do
+    case :dets.open_file(@table, opts()) do
       {:ok, table} ->
         case :dets.lookup(table, id) do
           [] ->
@@ -30,7 +30,7 @@ defmodule Keep.Store do
   end
 
   def put(id, val) do
-    case :dets.open_file(file_path(), @opts) do
+    case :dets.open_file(@table, opts()) do
       {:ok, table} ->
         case :dets.insert(table, {id, val}) do
           :ok ->
@@ -48,7 +48,7 @@ defmodule Keep.Store do
   end
 
   def delete(id) do
-    case :dets.open_file(file_path(), @opts) do
+    case :dets.open_file(@table, opts()) do
       {:ok, table} ->
         :dets.delete(table, id)
         :dets.close(file_path())

@@ -8,7 +8,7 @@ defmodule KeepWeb.ActionControllerTest do
       Store.put("example", "good")
 
       conn = get(conn, "/data/example")
-      assert response(conn, 200) == "\"good\""
+      assert response(conn, 200) == "good"
 
       Store.delete("example")
     end

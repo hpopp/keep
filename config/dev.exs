@@ -15,7 +15,7 @@ config :keep, KeepWeb.Endpoint,
   check_origin: false,
   watchers: []
 
-config :keep, file_path: "disk_storage_dev.dets"
+config :keep, file_path: 'disk_storage_dev.dets'
 
 # ## SSL Support
 #

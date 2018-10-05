@@ -6,7 +6,7 @@ config :keep, KeepWeb.Endpoint,
   http: [port: 4001],
   server: false
 
-config :keep, file_path: "test_storage.dets"
+config :keep, file_path: 'disk_storage_test.dets'
 
 # Print only warnings and errors during test
 config :logger, level: :warn

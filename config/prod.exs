@@ -15,11 +15,12 @@ use Mix.Config
 # which you typically run after static files are built.
 config :keep, KeepWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  url: [host: "example.com", port: 4040]
 
 # Do not print debug messages in production
 config :logger, level: :info
+
+config :keep, file_path: "disk_storage.dets"
 
 # ## SSL Support
 #
@@ -61,4 +62,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

@@ -4,9 +4,14 @@
 ## What's This?
 A Phoenix JSON API wrapper on top of an Erlang dets table. Perfect for stateful microservices when Postgres is overkill.
 
-## Usage
-Not really packaged for production, but `PORT=4040 mix phx.server` to run locally.
+## Getting Started
+Easiest to run with Docker:
 
+```bash
+$ docker run -p 4040:4040 hpopp/keep:0.1.1
+```
+
+## Usage
 ```bash
 $ curl -X PUT -H "Content-Type: text/plain" --data "some data" localhost:4040/data/some_key
 (empty, 201)

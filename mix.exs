@@ -4,10 +4,10 @@ defmodule Keep.Mixfile do
   def project do
     [
       app: :keep,
-      version: "0.1.1",
+      version: "0.2.0",
       elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -32,11 +32,10 @@ defmodule Keep.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.4"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:gettext, "~> 0.11"},
-      {:cowboy, "~> 1.0"},
-      {:distillery, "~> 1.5", runtime: false}
+      {:plug_cowboy, "~> 2.0"},
+      {:jason, "~> 1.0"},
+      {:distillery, "~> 1.5", runtime: false},
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
     ]
   end
 end

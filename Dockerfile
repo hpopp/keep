@@ -26,7 +26,7 @@ RUN apk upgrade --no-cache && \
 EXPOSE 4040
 
 WORKDIR /keep
-COPY --from=builder /keep/_build/prod/rel/keep/releases/0.1.1/keep.tar.gz .
+COPY --from=builder /keep/_build/prod/rel/keep/releases/0.2.0/keep.tar.gz .
 
 RUN tar zxf keep.tar.gz && rm keep.tar.gz
 

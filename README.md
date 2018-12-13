@@ -2,13 +2,13 @@
 > Persistent key-value store. A work in progress.
 
 ## What's This?
-A Phoenix JSON API wrapper on top of an Erlang dets table. Perfect for stateful microservices when Postgres is overkill.
+A Plug API wrapper on top of an Erlang dets table. Perfect for stateful microservices when Postgres is overkill.
 
 ## Getting Started
 Easiest to run with Docker:
 
 ```bash
-$ docker run -p 4040:4040 hpopp/keep:0.1.1
+$ docker run -p 4040:4040 hpopp/keep:0.2.0
 ```
 
 ## Usage

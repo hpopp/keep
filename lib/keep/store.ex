@@ -3,6 +3,8 @@ defmodule Keep.Store do
   Documentation for Keep.Store.
   """
 
+  require Logger
+
   @table :storage
   def opts, do: [type: :set, file: file_path()]
   def file_path, do: Application.get_env(:keep, :file_path)
@@ -24,7 +26,7 @@ defmodule Keep.Store do
         end
 
       error ->
-        IO.inspect(error)
+        error |> inspect() |> Logger.error()
         :error
     end
   end

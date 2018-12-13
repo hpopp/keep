@@ -1,9 +1,22 @@
-defmodule KeepWeb.ActionController do
-  use Phoenix.Controller
+defmodule Keep.Router do
+  use Plug.Router
 
   alias Keep.Store
 
-  def get(conn, %{"id" => id}) do
+  plug(Plug.RequestId)
+  plug(Plug.Logger)
+
+  plug(Plug.MethodOverride)
+  plug(Plug.Head)
+
+  plug(:match)
+  plug(:dispatch)
+
+  get "/healthz" do
+    send_resp(conn, 200, ~s({"status": "ok"}))
+  end
+
+  get "/data/:id" do
     case Store.get(id) do
       :error ->
         conn
@@ -21,7 +34,7 @@ defmodule KeepWeb.ActionController do
     end
   end
 
-  def put(conn, %{"id" => id}) do
+  put "/data/:id" do
     {:ok, val, conn} = Plug.Conn.read_body(conn)
 
     case Store.put(id, val) do
@@ -35,7 +48,7 @@ defmodule KeepWeb.ActionController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  delete "/data/:id" do
     case Store.delete(id) do
       :ok ->
         send_resp(conn, :no_content, "")
@@ -45,5 +58,25 @@ defmodule KeepWeb.ActionController do
         |> put_status(500)
         |> json(%{success: false, error: :open_table_failure})
     end
+  end
+
+  match _ do
+    send_resp(conn, 404, ~s({"success": false, "error": "not_found"}))
+  end
+
+  @doc """
+  Sends JSON response.
+  It uses the configured `:json_library` under the `:phoenix`
+  application for `:json` to pick up the encoder module.
+  ## Examples
+      iex> json(conn, %{id: 123})
+  """
+  @spec json(Plug.Conn.t(), term) :: Plug.Conn.t()
+  def json(conn, data) do
+    response = Jason.encode_to_iodata!(data)
+
+    conn
+    |> put_resp_header("content-type", "application/json")
+    |> send_resp(conn.status || 200, response)
   end
 end

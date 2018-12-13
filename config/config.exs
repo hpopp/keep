@@ -5,19 +5,9 @@
 # is restricted to this project.
 use Mix.Config
 
-# Configures the endpoint
-config :keep, KeepWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "ot8vg00W3gwQv2apMtA4jbyf8Y/XV2r7hByfiOH/r5OjfnFLFkJfjMj7lvb0W9hN",
-  render_errors: [view: KeepWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: Keep.PubSub,
-           adapter: Phoenix.PubSub.PG2]
-
 # Configures Elixir's Logger
-config :logger, :console,
-  format: "$time $metadata[$level] $message\n",
-  metadata: [:user_id]
+config :logger, :console, format: "$time $metadata[$level] $message\n"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
